@@ -1,0 +1,18 @@
+{
+  "name": "barcode_scanner",
+  "version": "0.1.0",
+  "description": "Barcode scanner",
+  "dependencies": {
+    "@zxing/library": "^0.17.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@types/node": "^14.11.2",
+    "dart_js_facade_gen": "0.0.7",
+    "rollup": "^2.28.2",
+    "typescript": "^4.0.3"
+  },
+  "scripts": {
+    "build": "npx tsc && npx dart_js_facade_gen --destination=./lib --base-path=./src src/barcode_scanner_imp.ts && npx rollup -c && rm src/barcode_scanner_imp.js"
+  }
+}

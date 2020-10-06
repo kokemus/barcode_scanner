@@ -1,0 +1,23 @@
+name: barcode_scanner
+description: A barcode scanner for web.
+version: 0.1.0
+author: kokemus
+homepage:
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter  
+  js: ^0.6.2
+
+dev_dependencies:
+  flutter_driver:
+    sdk: flutter
+  test: any
+
+flutter:
+  assets:
+    - packages/barcode_scanner/barcode_scanner.js
