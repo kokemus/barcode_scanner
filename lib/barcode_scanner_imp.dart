@@ -34,7 +34,7 @@ abstract class BarcodeScannerOptions {
 @JS()
 class BarcodeScanner {
   // @Ignore
-  // BarcodeScanner.fakeConstructor$();
+  //BarcodeScanner.fakeConstructor$();
   external BarcodeScannerOptions get options;
   external set options(BarcodeScannerOptions v);
   external dynamic get scanner;

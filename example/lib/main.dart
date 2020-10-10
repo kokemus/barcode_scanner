@@ -30,9 +30,15 @@ class _HomePageState extends State<HomePage> {
   BarcodeScanner scanner;
 
   @override
-  Future<void> initState() async {
-    this.scanner = await BarcodeScannerFactory.create(BarcodeScannerOptions(formats: ['ean_13', 'qr_code']));
+  void initState() {
+    _init();
     super.initState();
+  }
+
+  _init() async {
+    this.scanner = await BarcodeScannerFactory.create(
+      BarcodeScannerOptions(formats: ['ean_13', 'qr_code'])
+    );
   }
 
   void _scan() async {
