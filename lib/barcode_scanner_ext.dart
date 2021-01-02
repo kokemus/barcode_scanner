@@ -1,6 +1,7 @@
 import 'package:barcode_scanner/barcode_scanner.dart';
 
 import 'dart:async';
+// ignore: avoid_web_libraries_in_flutter
 import 'dart:html';
 
 /// Factory class to create [BarcodeScanner] instance.
@@ -21,7 +22,7 @@ class BarcodeScannerFactory {
     Completer c = new Completer();
     final script = document.createElement('script');
     script.setAttribute('type', 'text/javascript');
-    document.querySelector('head').append(script);
+    document.querySelector('head')!.append(script);
     script.setAttribute('src', url);
     script.addEventListener('load', (event) => c.complete());
     return c.future;

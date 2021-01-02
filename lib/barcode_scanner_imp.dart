@@ -26,9 +26,9 @@ abstract class BarcodeScannerOptions {
       List<
           String /*'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'*/ > /*Tuple of <'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'>*/ v);
   external factory BarcodeScannerOptions(
-      {bool beep,
+      {bool? beep,
       List<
-          String /*'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'*/ > /*Tuple of <'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'>*/ formats});
+          String /*'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'*/ >? /*Tuple of <'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'>*/ formats});
 }
 
 @JS()
@@ -47,7 +47,7 @@ class BarcodeScanner {
   external set closeButton(dynamic v);
   external dynamic get codeReader;
   external set codeReader(dynamic v);
-  external factory BarcodeScanner([BarcodeScannerOptions options]);
+  external factory BarcodeScanner([BarcodeScannerOptions? options]);
   external cancel();
   external show();
   external hide();
@@ -62,7 +62,7 @@ abstract class _BarcodeScanner {
 extension BarcodeScannerExtensions on BarcodeScanner {
   Future<String> scan() {
     final Object t = this;
-    final _BarcodeScanner tt = t;
+    final _BarcodeScanner tt = t as _BarcodeScanner;
     return promiseToFuture(tt.scan());
   }
 }
@@ -71,5 +71,5 @@ extension BarcodeScannerExtensions on BarcodeScanner {
 abstract class Promise<T> {
   external factory Promise(
       void executor(void resolve(T result), Function reject));
-  external Promise then(void onFulfilled(T result), [Function onRejected]);
+  external Promise then(void onFulfilled(T result), [Function? onRejected]);
 }
