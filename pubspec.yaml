@@ -1,7 +1,6 @@
 name: barcode_scanner
 description: A barcode scanner for web.
-version: 0.2.0-nullsafety.0
-author: kokemus
+version: 0.3.0
 homepage:
 
 environment:
@@ -11,12 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter  
-  js: ^0.6.3-nullsafety
+  js: ^0.6.3
 
 dev_dependencies:
   flutter_driver:
     sdk: flutter
-  test: ^1.16.0-nullsafety
+  test: ^1.17.0
 
 flutter:
   assets:

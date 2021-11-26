@@ -17,6 +17,16 @@ import "package:js/js_util.dart" show promiseToFuture;
 */
 @anonymous
 @JS()
+abstract class VideoConstraints {
+  external num get width;
+  external set width(num v);
+  external num get height;
+  external set height(num v);
+  external factory VideoConstraints({num width, num height});
+}
+
+@anonymous
+@JS()
 abstract class BarcodeScannerOptions {
   external bool get beep;
   external set beep(bool v);
@@ -25,10 +35,13 @@ abstract class BarcodeScannerOptions {
   external set formats(
       List<
           String /*'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'*/ > /*Tuple of <'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'>*/ v);
+  external VideoConstraints get video;
+  external set video(VideoConstraints v);
   external factory BarcodeScannerOptions(
       {bool? beep,
       List<
-          String /*'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'*/ >? /*Tuple of <'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'>*/ formats});
+          String /*'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'*/ >? /*Tuple of <'code_39'|'code_128'|'data_matrix'|'ean_8'|'ean_13'|'itf'|'pdf417'|'qr_code'|'rss_14'>*/ formats,
+      VideoConstraints? video});
 }
 
 @JS()

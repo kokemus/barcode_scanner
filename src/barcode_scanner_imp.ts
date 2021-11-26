@@ -12,10 +12,17 @@ type BarcodeFormats =
   'qr_code' |
   'rss_14'
 
+type VideoConstraints = {
+  width: number
+  height: number 
+}
+  
 type BarcodeScannerOptions = {
   beep?: boolean
   formats?: [BarcodeFormats]
+  video?: VideoConstraints
 }
+
 
 class BarcodeScanner {
   private options: BarcodeScannerOptions
@@ -25,7 +32,7 @@ class BarcodeScanner {
   private closeButton: any
   private codeReader: any
 
-  constructor(options: BarcodeScannerOptions = {beep: false}) {
+  constructor(options: BarcodeScannerOptions = {beep: false, video: null}) {
     this.options = options
     this.scanner = document.createElement('div')
     this.scanner.id = "barcode-scanner"
@@ -39,8 +46,16 @@ class BarcodeScanner {
     this.scanner.style.display = 'none'
 
     this.video = document.createElement('video')
-    this.video.style.width = '100%'
-    this.video.style.minHeight = '100%'
+    if (this.options.video != null) {
+      this.video.style.position = 'fixed'
+      this.video.style.setProperty('top', `calc(50% - ${this.options.video.height / 2}px)`);
+      this.video.style.setProperty('left', `calc(50% - ${this.options.video.width / 2}px)`);
+      this.video.style.width = `${this.options.video.width}px`
+      this.video.style.height = `${this.options.video.height}px`
+    } else {
+      this.video.style.width = '100%'
+      this.video.style.height = '100%'
+    }
     this.video.style.objectFit = 'cover'
     this.scanner.appendChild(this.video)
 

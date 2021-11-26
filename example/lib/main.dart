@@ -11,6 +11,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Barcode Scanner Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -27,7 +28,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String _code = "";
-  BarcodeScanner scanner;
+  BarcodeScanner _scanner;
+  bool _isFullscreenVideo = true;
 
   @override
   void initState() {
@@ -36,23 +38,24 @@ class _HomePageState extends State<HomePage> {
   }
 
   _init() async {
-    this.scanner = await BarcodeScannerFactory.create(
-      BarcodeScannerOptions(formats: ['ean_13', 'qr_code'])
-    );
+    _scanner = await BarcodeScannerFactory.create(BarcodeScannerOptions(
+        formats: ['ean_13', 'qr_code'],
+        video: _isFullscreenVideo
+            ? null
+            : VideoConstraints(width: 600, height: 200)));
   }
 
   void _scan() async {
     setState(() {
       _code = '';
     });
-    final operation = CancelableOperation<String>.fromFuture(
-      scanner.scan(), onCancel: () => scanner.cancel()
-    );
+    final operation = CancelableOperation<String>.fromFuture(_scanner.scan(),
+        onCancel: () => _scanner.cancel());
     operation.value.then((value) => setState(() {
-      _code = value;
-    }));
+          _code = value;
+        }));
     Future.delayed(Duration(seconds: 15), () {
-        operation.cancel();
+      operation.cancel();
     });
   }
 
@@ -61,6 +64,21 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Barcode Scanner Demo"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  _isFullscreenVideo = !_isFullscreenVideo;
+                });
+                _init();
+              },
+              icon: Tooltip(
+                message: 'Toggle video size',
+                child: Icon(_isFullscreenVideo
+                    ? Icons.fullscreen
+                    : Icons.fullscreen_exit),
+              ))
+        ],
       ),
       body: Center(
         child: Column(
@@ -77,7 +95,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: _scan,
         tooltip: 'Scan barcode',
         child: Icon(Icons.camera),
-      ), 
+      ),
     );
   }
 }
