@@ -31,8 +31,10 @@ final code = await scanner.scan();
 import 'package:barcode_scanner/barcode_scanner.dart';
 
 BarcodeScanner scanner = await BarcodeScannerFactory.create(
-  BarcodeScannerOptions(formats: ['ean_13', 'qr_code']),
-  VideoConstraints(width: 600, height: 200)
+  BarcodeScannerOptions(
+    formats: ['ean_13', 'qr_code'],
+    video: VideoConstraints(width: 600, height: 200)
+  )
 );
 final code = await scanner.scan();
 ```
